@@ -1,0 +1,5 @@
+rootProject.name = 'learn-spring-microservices'
+
+include 'photoapp-disc-service'
+include 'photoapp-account'
+include 'photoapp-users'

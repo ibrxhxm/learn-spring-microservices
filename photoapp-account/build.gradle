@@ -1,0 +1,12 @@
+ext {
+	set('springCloudVersion', "2021.0.1")
+}
+
+dependencies {
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
