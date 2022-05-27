@@ -1,4 +1,4 @@
-package com.ms.photoappaccount;
+package com.example.photoappaccount;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
