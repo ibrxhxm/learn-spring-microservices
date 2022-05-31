@@ -1,10 +1,10 @@
-package com.ms.photoappusers;
+package com.example.photoappdiscservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PhotoappUsersApplicationTests {
+class PhotoappDiscServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

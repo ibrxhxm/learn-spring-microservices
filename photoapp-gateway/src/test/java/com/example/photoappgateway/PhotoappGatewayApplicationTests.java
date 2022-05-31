@@ -1,10 +1,10 @@
-package com.ms.photoappaccount;
+package com.example.photoappgateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PhotoappAccountApplicationTests {
+class PhotoappGatewayApplicationTests {
 
 	@Test
 	void contextLoads() {

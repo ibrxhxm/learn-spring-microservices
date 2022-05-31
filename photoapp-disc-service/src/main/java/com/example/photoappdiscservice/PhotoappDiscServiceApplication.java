@@ -1,4 +1,4 @@
-package com.ms.photoappdiscservice;
+package com.example.photoappdiscservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
