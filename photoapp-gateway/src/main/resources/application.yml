@@ -9,21 +9,46 @@ spring:
       enabled: true
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
+#      discovery:
+#        locator:
+#          enabled: true
+#          lower-case-service-id: true
       routes:
-        - id: users-status-check
+        - id: user-ws
           uri: lb://user-ws
           predicates:
-            - Path=/users/status/check
-            - Method=GET
+            - Path=/user-ws/users
+            - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-#            - RewritePath=/user-ws/(?<segment>.*), /$\{segment}
+            - RewritePath=/user-ws/(?<segment>.*), /$\{segment}
+
+        - id: user-ws-login
+          uri: lb://user-ws
+          predicates:
+            - Path=/user-ws/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-ws/(?<segment>.*), /$\{segment}
+
+        - id: user-ws-get-put-delete
+          uri: lb://user-ws
+          predicates:
+            - Path=/user-ws/users/**
+            - Method=GET, PUT, DELETE
+            - Header=Authorization, Bearer (.*)
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-ws/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8010/eureka
+
+security:
+  config:
+    token_lifespan: 864000000
+    token_secret: notSoSecretToken
