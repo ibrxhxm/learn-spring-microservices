@@ -3,6 +3,7 @@ package com.example.photoappusers.controller;
 import com.example.photoappusers.domain.dto.request.CreateUserRequest;
 import com.example.photoappusers.domain.dto.response.UserResponse;
 import com.example.photoappusers.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
+@Slf4j
 public class UserController {
 
     private final Environment env;
@@ -25,6 +27,7 @@ public class UserController {
 
     @GetMapping("/status/check")
     public String status() {
+        log.info("Status check");
         return "Working on port " + env.getProperty("local.server.port");
     }
 
