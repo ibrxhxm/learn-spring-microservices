@@ -1,0 +1,22 @@
+server:
+  port: 8030
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ibrxhxm/learn-microservices-demo-config-server
+          username: ibrxhxm
+          password: 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
+          clone-on-start: true
+          skipSslValidation: true
+          default-label: main
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8010/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

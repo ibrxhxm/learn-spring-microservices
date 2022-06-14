@@ -7,6 +7,8 @@ spring:
   devtools:
     restart:
       enabled: true
+  config:
+    import: optional:configserver:http://localhost:8030
   cloud:
     gateway:
 #      discovery:
@@ -48,7 +50,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8010/eureka
 
-security:
-  config:
-    token_lifespan: 864000000
-    token_secret: notSoSecretToken
+#security:
+#  config:
+#    token_lifespan: 864000000
+#    token_secret: notSoSecretToken

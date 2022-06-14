@@ -7,7 +7,8 @@ spring:
   devtools:
     restart:
       enabled: true
-
+  config:
+    import: optional:configserver:http://localhost:8030
   datasource:
     url: jdbc:h2:mem:testdb
     username: sa
@@ -26,11 +27,11 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
-gateway:
-  config:
-    ip: 192.0.2.2
-
-security:
-  config:
-    token_lifespan: 864000000
-    token_secret: notSoSecretToken
+#gateway:
+#  config:
+#    ip: 192.168.88.32
+#
+#security:
+#  config:
+#    token_lifespan: 864000000
+#    token_secret: notSoSecretToken
