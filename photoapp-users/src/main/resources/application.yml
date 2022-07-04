@@ -3,16 +3,20 @@ server:
 
 spring:
   application:
-    name: user-ws
+    name: userws
   devtools:
     restart:
       enabled: true
   config:
     import: optional:configserver:http://localhost:8030
   datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
+#    url: jdbc:h2:mem:testdb
+    url: jdbc:mysql://localhost:3306/photo_app?useSSL=false&allowPublicKeyRetrieval=true&maxReconnects=3&useLegacyDatetimeCode=false&serverTimezone=Africa/Lagos
+    username: root
+    password: mayonnaise
+  jpa:
+    hibernate:
+      ddl-auto: update
 
   h2:
     console:
@@ -20,12 +24,28 @@ spring:
       settings:
         web-allow-others: true
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: password
+
+  bus:
+    enabled: true
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8010/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - mappings
 
 #gateway:
 #  config:

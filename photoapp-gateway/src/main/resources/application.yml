@@ -16,39 +16,72 @@ spring:
 #          enabled: true
 #          lower-case-service-id: true
       routes:
-        - id: user-ws
-          uri: lb://user-ws
+        - id: userws
+          uri: lb://userws
           predicates:
-            - Path=/user-ws/users
+            - Path=/userws/users
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-ws/(?<segment>.*), /$\{segment}
+            - RewritePath=/userws/(?<segment>.*), /$\{segment}
 
         - id: user-ws-login
-          uri: lb://user-ws
+          uri: lb://userws
           predicates:
-            - Path=/user-ws/login
+            - Path=/userws/login
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-ws/(?<segment>.*), /$\{segment}
+            - RewritePath=/userws/(?<segment>.*), /$\{segment}
 
         - id: user-ws-get-put-delete
-          uri: lb://user-ws
+          uri: lb://userws
           predicates:
-            - Path=/user-ws/users/**
+            - Path=/userws/users/**
             - Method=GET, PUT, DELETE
             - Header=Authorization, Bearer (.*)
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/user-ws/(?<segment>.*), /$\{segment}
+            - RewritePath=/userws/(?<segment>.*), /$\{segment}
             - AuthorizationHeaderFilter
+
+        - id: user-ws-actuator
+          uri: lb://userws/actuator/mappings
+          predicates:
+            - Path=/userws/actuator/mappings
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: password
+
+  bus:
+    enabled: true
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8010/eureka
+  instance:
+    hostname: 192.168.88.32
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - gateway
+          - beans
+          - health
+          - httptrace
+          - info
 
 #security:
 #  config:

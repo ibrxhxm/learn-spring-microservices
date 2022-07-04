@@ -3,16 +3,28 @@ server:
 spring:
   application:
     name: config-server
+  profiles:
+    active: native
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/ibrxhxm/learn-microservices-demo-config-server
-          username: ibrxhxm
-          password: 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
-          clone-on-start: true
-          skipSslValidation: true
-          default-label: main
+#          uri: https://github.com/ibrxhxm/learn-microservices-demo-config-server
+#          username: ibrxhxm
+#          password: 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
+#          clone-on-start: true
+#          skipSslValidation: true
+#          default-label: main
+        native:
+          search-locations: file://${user.home}/IdeaProjects/learn-microservices-demo-config-server
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: password
+
+  bus:
+    enabled: true
 
 eureka:
   client:
@@ -20,3 +32,9 @@ eureka:
       defaultZone: http://localhost:8010/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: busrefresh
