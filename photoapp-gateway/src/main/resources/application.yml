@@ -82,8 +82,3 @@ management:
           - health
           - httptrace
           - info
-
-#security:
-#  config:
-#    token_lifespan: 864000000
-#    token_secret: notSoSecretToken
